@@ -1,0 +1,110 @@
+openapi: 3.0.0
+info:
+  title: Green House Gas Emissions API
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://ghg-emissions-api.herokuapp.com
+  variables: {}
+paths:
+  /:
+    get:
+      tags:
+      - Misc
+      summary: Intro
+      operationId: Intro
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /listcountries:
+    get:
+      tags:
+      - Misc
+      summary: List Countries
+      operationId: ListCountries
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /listcategories:
+    get:
+      tags:
+      - Misc
+      summary: List Categories
+      operationId: ListCategories
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /countries:
+    get:
+      tags:
+      - Misc
+      summary: List all the countries with their data
+      operationId: Listallthecountrieswiththeirdata
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /country:
+    get:
+      tags:
+      - Misc
+      summary: List a country's emission for selective categories and year range
+      operationId: Listacountry'semissionforselectivecategoriesandyearrange
+      parameters:
+      - name: id
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: debe5302
+      - name: startYear
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 2005
+      - name: endYear
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 2012
+      - name: params
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: CO2,HFC,SF6
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+tags:
+- name: Misc
+  description: ''
