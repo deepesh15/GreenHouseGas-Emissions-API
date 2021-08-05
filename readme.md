@@ -11,4 +11,4 @@ To run app.py
 * Then run `python cleanCreateDB.py` to create data.db from csv file.
 * Then run `python app.py`
 
-Live Link :
+Live Link : https://deepesh15.github.io/GreenHouseGas-Emissions-API/
