@@ -1,10 +1,9 @@
 name: Changelog-demo
 on: [push]
 jobs:
-  Log-Start-actions:
+  Checkout:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Let's test changelog generation"
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -13,28 +12,14 @@ jobs:
           fetch-depth: 100
 
   release:
+    needs: Checkout
     runs-on: ubuntu-latest
     steps:
       - name: Build Changelog
         if: startsWith(github.ref, 'refs/tags/')
         uses: mikepenz/release-changelog-builder-action@v3
         with:
-          configurationJson: |
-            {
-              "template": "#TEST Change log\n\n<details>\n<summary>Uncategorized</summary>\n\n#UNCATEGORIZED\n</details>",
-              "pr_template": "- #TITLE PR: ##NUMBER",
-              "empty_template": ""
-              "categories": [
-                {
-                    "title": "## 💬 Other",
-                    "labels": ["other"]
-                },
-                {
-                    "title": "## 📦 Dependencies",
-                    "labels": ["dependencies"]
-                }
-              ]
-            }
+          configuration: "rel-config.json"
         env:
           GITHUB_TOKEN: ${{ secrets.TEMP_ACTION }}
 
