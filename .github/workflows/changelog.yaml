@@ -14,10 +14,10 @@ jobs:
         with:
           # Make sure the actual branch is checked out when running on pull requests
           ref: ${{ github.head_ref }}
-          # fetch-depth: 100
+          fetch-depth: 100
 
       - name: Build Changelog
-        if: startsWith(github.ref, 'refs/tags/test')
+        if: startsWith(github.ref, 'refs/tags/')
         uses: mikepenz/release-changelog-builder-action@v3
         with:
           configuration: "rel-config.json"
