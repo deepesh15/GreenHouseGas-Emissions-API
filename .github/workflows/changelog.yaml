@@ -5,10 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Let's test changelog generation"
-
-  release:
-    runs-on: ubuntu-latest
-    steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -16,9 +12,11 @@ jobs:
           ref: ${{ github.head_ref }}
           fetch-depth: 100
 
+  release:
+    runs-on: ubuntu-latest
+    steps:
       - name: Build Changelog
         if: startsWith(github.ref, 'refs/tags/')
-        needs: Checkout
         uses: mikepenz/release-changelog-builder-action@v3
         with:
           configurationJson: |
