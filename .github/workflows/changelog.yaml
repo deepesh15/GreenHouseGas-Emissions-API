@@ -17,8 +17,8 @@ jobs:
           fetch-depth: 100
 
       - name: Build Changelog
-        needs: Checkout
         if: startsWith(github.ref, 'refs/tags/')
+        needs: Checkout
         uses: mikepenz/release-changelog-builder-action@v3
         with:
           configurationJson: |
