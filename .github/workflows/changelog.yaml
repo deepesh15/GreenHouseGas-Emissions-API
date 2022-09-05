@@ -19,7 +19,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         uses: mikepenz/release-changelog-builder-action@v3
         with:
-          configuration: "rel-config.json"
+          configuration: "config.json"
         env:
           GITHUB_TOKEN: ${{ secrets.TEMP_ACTION }}
 
