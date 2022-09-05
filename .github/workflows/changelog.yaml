@@ -16,28 +16,40 @@ jobs:
           ref: ${{ github.head_ref }}
           fetch-depth: 100
 
-      - name: Build Changelog
+      # - name: Build Changelog
+      #   if: startsWith(github.ref, 'refs/tags/')
+      #   uses: mikepenz/release-changelog-builder-action@v3
+      #   with:
+      #     configurationJson: |
+      #       {
+      #         "template": "#{{CHANGELOG}}\n\n<details>\n<summary>Uncategorized</summary>\n\n#{{UNCATEGORIZED}}\n</details>",
+      #         "pr_template": "- #{{TITLE}} PR: ##{{NUMBER}}",
+      #         "empty_template": ""
+      #         "categories": [
+      #           {
+      #               "title": "## 💬 Other",
+      #               "labels": ["other"]
+      #           },
+      #           {
+      #               "title": "## 📦 Dependencies",
+      #               "labels": ["dependencies"]
+      #           }
+      #         ]
+      #       }
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.TEMP_ACTION }}
+      - name: "Complex Configuration"
+        id: build_changelog
         if: startsWith(github.ref, 'refs/tags/')
-        uses: mikepenz/release-changelog-builder-action@v3
+        uses: mikepenz/release-changelog-builder-action@{latest-release}
         with:
-          configurationJson: |
-            {
-              "template": "#{{CHANGELOG}}\n\n<details>\n<summary>Uncategorized</summary>\n\n#{{UNCATEGORIZED}}\n</details>",
-              "pr_template": "- #{{TITLE}} PR: ##{{NUMBER}}",
-              "empty_template": ""
-              "categories": [
-                {
-                    "title": "## 💬 Other",
-                    "labels": ["other"]
-                },
-                {
-                    "title": "## 📦 Dependencies",
-                    "labels": ["dependencies"]
-                }
-              ]
-            }
-        env:
-          GITHUB_TOKEN: ${{ secrets.TEMP_ACTION }}
+          configuration: "rel-config.json"
+          owner: "mikepenz"
+          repo: "release-changelog-builder-action"
+          ignorePreReleases: "false"
+          fromTag: "0.3.0"
+          toTag: "0.5.0"
+          token: ${{ secrets.TEMP_ACTION }}
 
       - name: Create Release
         uses: mikepenz/action-gh-release@v0.2.0-a03 #softprops/action-gh-release
