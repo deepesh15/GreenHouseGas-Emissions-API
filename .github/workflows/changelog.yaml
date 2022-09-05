@@ -25,5 +25,5 @@ jobs:
       - name: Create Release
         uses: mikepenz/action-gh-release@v0.2.0-a03 #softprops/action-gh-release
         with:
-          token: "test "
+          token: "TEMP_ACTION"
           body: ${{steps.github_release.outputs.changelog}}
