@@ -19,6 +19,8 @@ jobs:
       - name: Build Changelog
         if: startsWith(github.ref, 'refs/tags/test')
         uses: mikepenz/release-changelog-builder-action@v3
+        with:
+          configuration: "release-configuration.json"
         env:
           GITHUB_TOKEN: ${{ secrets.TEMP_ACTION }}
 
